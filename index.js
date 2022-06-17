@@ -1,20 +1,42 @@
 // Your code here
-function createEmployeeRecord(array){
+function createEmployeeRecord(empArray){
     return {
-        firstName: array[0],
-        familyName: array[1],
-        title :array[2],
-        payPerHour:array[3],
+        firstName: empArray[0],
+        familyName: empArray[1],
+        title :empArray[2],
+        payPerHour:empArray[3],
         timeInEvents: [],
         timeOutEvents: []
 
     }
 }
-function createEmployeeRecords(arrays){
-   return arrays.reduce(createEmployeeRecord)
+function createEmployeeRecords(empArrRecord){
+   empArrRecord.map(function(eachArrar){
+       createEmployeeRecord(eachArrar)
+   })
 }
 
-function createTimeInEvent(empObj, date){
-    date = new Date();
-    empObj.timeInEvents = date;
+function createTimeInEvent(empObjRec, dateStamp){
+    let [date, hour]=dateStamp.split(" ");
+    const empTimeIn = {
+        type:'TimeIn',
+        hour: hour,
+        date:date
+    }
+    return empObjRec.timeInEvents.push(empTimeIn)
+}
+
+function createTimeOutEvent(empObjRec, dateStamp){
+    let [date, hour]=dateStamp.split(" ");
+    const empTimeOut = {
+        type:'TimeOut',
+        hour: hour,
+        date:date
+    }
+    return empObjRec.timeOutEvents.push(empTimeOut)
+}
+
+function hoursWorkedOnDate(empObjRec,dataInMDY){
+    const hoursWorked = empObjRec.timeOutEvents - empObjRec.timeInEvents
+    return hoursWorkedInt.parseInt(hoursWorked, 10)
 }
